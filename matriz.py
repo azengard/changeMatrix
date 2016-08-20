@@ -11,17 +11,24 @@ def read_sequence():  # Read and validate a sequence of commands.
         return sqc
 
 
-def c_array(cmd):  # Create a array - 'I' Command.
+def print_board(board):  # Print the Board.
+    for row in board:
+        print("".join(row))
+    print("\n")
+
+
+def create_array(cmd):  # Create a array - 'I' Command.
     board = []
     for x in range(int(cmd[2])):
         board.append(["O"] * int(cmd[1]))
     return board
 
 
-def print_board(board):  # Print the Board.
-    for row in board:
-        print("".join(row))
-    print("\n")
+def clean_array(board):  # Clean a array - 'C' Command.
+    for x in range(0, len(board) - 1):
+        for y in range(0, len(board[x]) - 1):
+            board[x][y] = "O"
+    return board
 
 
 def color_pixel(cmd, board):  # Change the color of one pixel - 'L' Command.
@@ -44,13 +51,21 @@ def hor_pixel(cmd, board):  # Change color of a line - 'H' Command.
     return board
 
 
+def block_pixel(cmd, board):  # Change color of a entire block - 'K' Command.
+    K, X1, Y1, X2, Y2, C = cmd
+    for hor in range(int(X1) - 1, int(X2)):
+        for ver in range(int(Y1) - 1, int(Y2)):
+            board[int(ver)][int(hor)] = C
+    return board
+
+
 def main():
     while True:
         cmd = read_sequence()
         if cmd[0] == "X" and len(cmd) == 1:
             break
         elif cmd[0] == "I" and len(cmd) == 3:
-            board = c_array(cmd)
+            board = create_array(cmd)
         elif cmd[0] == "L" and len(cmd) == 4:
             board = color_pixel(cmd, board)
         elif cmd[0] == "V" and len(cmd) == 5:
@@ -58,13 +73,13 @@ def main():
         elif cmd[0] == "H" and len(cmd) == 5:
             board = hor_pixel(cmd, board)
         elif cmd[0] == "K" and len(cmd) == 6:
-            pass
+            board = block_pixel(cmd, board)
         elif cmd[0] == "F" and len(cmd) == 4:
             pass
         elif cmd[0] == "S" and len(cmd) == 2:
             pass
         elif cmd[0] == "C" and len(cmd) == 1:
-            pass
+            board = clean_array(board)
         else:
             continue
         print_board(board)
