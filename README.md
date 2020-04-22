@@ -71,19 +71,19 @@ Entrada 01:
 ```
 I 5 6
 L 2 3 A
-S one.bmp
+S one.txt
 G 2 3 J
 V 2 3 4 W
 H 3 4 2 Z
 F 3 3 J
-S two.bmp
+S two.txt
 X
 ```
 
 Saida 01:
 
 ```
-one.bmp
+one.txt
 OOOOO
 OOOOO
 OAOOO
@@ -91,7 +91,7 @@ OOOOO
 OOOOO
 OOOOO
 
-two.bmp
+two.txt
 JJJJJ
 JJZZJ
 JWJJJ
@@ -111,14 +111,14 @@ H 1 10 5 Z
 F 3 3 J
 K 2 7 8 8 E
 F 9 9 R
-S one.bmp
+S three.txt
 X
 ```
 
 Saida 02:
 
 ```
-one.bmp
+three.txt
 JJJJJJJJJJ
 JJJJJJJJJJ
 JWJJAJJJJJ
